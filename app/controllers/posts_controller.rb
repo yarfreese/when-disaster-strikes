@@ -22,6 +22,21 @@ class PostsController < ApplicationController
   def show
   end
 
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      flash[:notice] = "Post has been updated."
+
+      redirect_to [@project, @post]
+    else
+      flash[:alert] = "Post has not been updated."
+
+      render action: "edit"
+    end
+  end
+
 private
   def set_project
     @project = Project.find(params[:project_id])
