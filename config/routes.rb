@@ -1,4 +1,8 @@
 Wds::Application.routes.draw do
+  #get "users/new"
+  #get "users/create"
+  #get "users/show"
+  resources :users
   resources :projects do
     resources :posts
   end

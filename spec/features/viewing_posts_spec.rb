@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "Viewing tickets" do
+feature "Viewing posts" do
   before do
     choking = FactoryGirl.create(:project, name: "Choking")
     FactoryGirl.create(:post, project: choking, title: "heimlich",
