@@ -7,6 +7,8 @@ Wds::Application.routes.draw do
     resources :posts
   end
   root :to => "projects#index"
+  get "/signin", to: "sessions#new"
+  post "/signin", to: "sessions#create"
 end
 
   # The priority is based upon order of creation: first created -> highest priority.
