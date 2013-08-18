@@ -8,4 +8,12 @@
                 "Are you sure you want to delete this project?"
             } %>
 <%= link_to "New Post", new_project_post_path(@project) %>
+<ul id='posts'>
+  <% @project.posts.each do |post| %>
+    <li>
+      #<%= post.id %> -
+      <%= link_to post.title, [@project, post] %>
+    </li>
+  <% end %>
+</ul>
 
