@@ -2,10 +2,26 @@ require 'spec_helper'
 
 feature "Creating Posts" do
   before do
-    FactoryGirl.create(:project, name: "Bad Hair Day")
+    # FactoryGirl.create(:project, name: "Bad Hair Day")
+    project = FactoryGirl.create(:project)
+    user = FactoryGirl.create(:user)
 
     visit '/'
-    click_link "Bad Hair Day"
+    # click_link "Bad Hair Day"
+    click_link project.name
+    click_link "New Post"
+    message = "You need to sign in or sign up before continuing."
+    expect(page).to have_content(message)
+
+    fill_in "User Name", with: user.name
+    fill_in "Password", with: user.password
+    click_button "Sign in"
+
+    # within("h2") { expect(page).to have_content("New Post") }
+    expect(page).to have_content("Projects")
+
+    click_link project.name
+    expect(page).to have_content("New Post")
     click_link "New Post"
   end
 
@@ -16,6 +32,9 @@ feature "Creating Posts" do
 
     expect(page).to have_content('Post has been created.')
 
+    within "#post #author" do
+      expect(page).to have_content("Created by sample@example.com")
+    end
     # post = Post.where(title: "Bo averts disaster", project_id: @project_id).first
     # expect(page.current_url).to eql(project_post_url(post))
   end

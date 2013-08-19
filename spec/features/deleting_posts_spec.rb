@@ -2,9 +2,11 @@ require 'spec_helper'
 
 feature "Deleting posts" do
   let!(:project) { FactoryGirl.create(:project) }
-  let!(:post) { FactoryGirl.create(:post, project: project) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:post) { FactoryGirl.create(:post, project: project, user: user) }
 
   before do
+    sign_in_as!(user)
     visit '/'
     click_link project.name
     click_link post.title

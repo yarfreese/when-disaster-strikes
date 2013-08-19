@@ -2,9 +2,15 @@ require 'spec_helper'
 
 feature "Editing posts" do
   let!(:project) { FactoryGirl.create(:project) }
-  let!(:post) { FactoryGirl.create(:post, project: project) }
+  let!(:user) { FactoryGirl.create(:user) }
+  let!(:post) do
+    post = FactoryGirl.create(:post, project: project)
+    post.update(user: user)
+    post
+  end
 
   before do
+    sign_in_as!(user)
     visit '/'
     click_link project.name
     click_link post.title

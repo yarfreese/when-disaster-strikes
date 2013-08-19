@@ -2,9 +2,11 @@ require 'spec_helper'
 
 feature "Viewing posts" do
   before do
+    user = FactoryGirl.create(:user)
     choking = FactoryGirl.create(:project, name: "Choking")
-    FactoryGirl.create(:post, project: choking, title: "heimlich",
+    post = FactoryGirl.create(:post, project: choking, title: "heimlich",
            description: "Bo gets the heimlich")
+    post.update(user: user)
 
     falling = FactoryGirl.create(:project, name: "Falling")
     FactoryGirl.create(:post, project: falling, title: "maximum area - spread out",
