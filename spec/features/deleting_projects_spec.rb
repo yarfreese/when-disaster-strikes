@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 feature "Deleting projects" do
+  before do
+    sign_in_as!(FactoryGirl.create(:admin_user))
+  end
+
   scenario "Deleting projects" do
     FactoryGirl.create(:project, name: "Delete This Project")
 
