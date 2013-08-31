@@ -11,11 +11,11 @@ class Admin::UsersController < Admin::BaseController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "User has been created."
-      redirect_to admin_users_path
     else
       flash.now[:alert] = "User has not been created."
       render :action => "new"
     end
+    redirect_to admin_users_path
   end
   def edit
   end
@@ -35,6 +35,15 @@ class Admin::UsersController < Admin::BaseController
   end
   def show
     #puts @user
+  end
+  def destroy
+    if @user == current_user
+      flash[:alert] = "You cannot delete yourself!"
+    else 
+      @user.destroy
+      flash[:notice] = "User has been deleted."
+    end
+    redirect_to admin_users_path
   end
 
 private
