@@ -17,8 +17,24 @@ class Admin::UsersController < Admin::BaseController
       render :action => "new"
     end
   end
+  def edit
+  end
+  def update
+    if params[:user][:password].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+    if @user.update(user_params)
+    #if @user.update_attributes(params[:user], :as => :admin)
+      flash[:notice] = "User has been updated."
+      redirect_to admin_users_path
+    else
+      flash[:alert] = "User has not been updated."
+      render action: "edit"
+    end
+  end
   def show
-    puts @user
+    #puts @user
   end
 
 private
@@ -33,7 +49,7 @@ private
 private
   def find_user
     @user = User.find(params[:id])
-    puts @user
+    # puts @user
   end
 end
 # class Admin::UsersController < ApplicationController

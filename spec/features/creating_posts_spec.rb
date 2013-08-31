@@ -5,6 +5,7 @@ feature "Creating Posts" do
     # FactoryGirl.create(:project, name: "Bad Hair Day")
     project = FactoryGirl.create(:project)
     user = FactoryGirl.create(:user)
+    @email = user.email
 
     visit '/'
     # click_link "Bad Hair Day"
@@ -33,7 +34,7 @@ feature "Creating Posts" do
     expect(page).to have_content('Post has been created.')
 
     within "#post #author" do
-      expect(page).to have_content("Created by sample@example.com")
+      expect(page).to have_content("Created by #{@email}")
     end
     # post = Post.where(title: "Bo averts disaster", project_id: @project_id).first
     # expect(page.current_url).to eql(project_post_url(post))
