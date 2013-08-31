@@ -1,6 +1,7 @@
 Wds::Application.routes.draw do
   # get "users/index" # created when we created admin namespace with rails g controller admin/users index
   namespace :admin do
+    root :to => "base#index"
     resources :users
   end
   #get "users/new"
