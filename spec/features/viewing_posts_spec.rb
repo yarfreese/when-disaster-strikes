@@ -3,7 +3,9 @@ require 'spec_helper'
 feature "Viewing posts" do
   before do
     user = FactoryGirl.create(:user)
+    sign_in_as!(user)
     choking = FactoryGirl.create(:project, name: "Choking")
+    define_permission!(user, "view", choking)
     post = FactoryGirl.create(:post, project: choking, title: "heimlich",
            description: "Bo gets the heimlich")
     post.update(user: user)

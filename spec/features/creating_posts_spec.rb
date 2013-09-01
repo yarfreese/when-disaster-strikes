@@ -5,25 +5,28 @@ feature "Creating Posts" do
     # FactoryGirl.create(:project, name: "Bad Hair Day")
     project = FactoryGirl.create(:project)
     user = FactoryGirl.create(:user)
+    define_permission!(user, "view", project)
     @email = user.email
+    sign_in_as!(user)
 
     visit '/'
-    # click_link "Bad Hair Day"
-    click_link project.name
-    click_link "New Post"
-    message = "You need to sign in or sign up before continuing."
-    expect(page).to have_content(message)
-
-    fill_in "User Name", with: user.name
-    fill_in "Password", with: user.password
-    click_button "Sign in"
-
-    # within("h2") { expect(page).to have_content("New Post") }
-    expect(page).to have_content("Projects")
-
     click_link project.name
     expect(page).to have_content("New Post")
     click_link "New Post"
+    # removed a lot of lines when created permissions scope
+    #message = "You need to sign in or sign up before continuing."
+    #expect(page).to have_content(message)
+
+    #fill_in "User Name", with: user.name
+    #fill_in "Password", with: user.password
+    #click_button "Sign in"
+
+    # within("h2") { expect(page).to have_content("New Post") }
+    #expect(page).to have_content("Projects")
+
+    #click_link project.name
+    #expect(page).to have_content("New Post")
+    #click_link "New Post"
   end
 
   scenario "Can create a Post" do
