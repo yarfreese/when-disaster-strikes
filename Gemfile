@@ -11,6 +11,10 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
+# Use CanCan - gives can? and cannot? on the permissions table
+# need to add Ability class
+gem 'cancan', '1.6.9'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 

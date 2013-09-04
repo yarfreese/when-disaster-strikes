@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :require_signin!
   before_action :set_project
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_create!, only: [:new, :create]
 
   def new
     @post = @project.posts.build
@@ -66,4 +67,11 @@ private
     params.require(:post).permit(:title, :description)
   end
 
+private
+  def authorize_create!
+   if !current_user.admin?  && cannot?("create posts".to_sym, @project)
+     flash[:alert] = "You cannot create posts on this project."
+     redirect_to @project
+   end 
+  end
 end
