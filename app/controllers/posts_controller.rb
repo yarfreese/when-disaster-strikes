@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   before_action :set_project
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize_create!, only: [:new, :create]
+  before_action :authorize_update!, only: [:edit, :update]
 
   def new
     @post = @project.posts.build
@@ -74,4 +75,12 @@ private
      redirect_to @project
    end 
   end
+
+private
+  def authorize_update!
+    if !current_user.admin? && cannot?("edit posts".to_sym, @project)
+      flash[:alert] = "You cannot edit posts on this project."
+      redirect_to @project
+    end
+  end  
 end

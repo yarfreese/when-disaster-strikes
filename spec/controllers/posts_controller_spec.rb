@@ -27,6 +27,12 @@ describe PostsController do
       flash[:alert].should eql(message)
     end
 
+    def cannot_update_posts!
+      expect(response).to redirect_to(project)
+      expect(flash[:alert]).to eql("You cannot edit posts " \
+                                   "on this project.")
+    end
+
     it "cannot begin to create a post" do
       get :new, :project_id => project.id
       cannot_create_posts!
@@ -35,6 +41,19 @@ describe PostsController do
     it "cannot create a post without permission" do
       post :create, :project_id => project.id
       cannot_create_posts!
+    end
+
+    it "cannot edit a post without permission" do
+      get :edit, { project_id: project.id, id: blog_post.id }
+      cannot_update_posts!
+    end
+
+    it "cannot update a post without permission" do
+      put :update, { project_id: project.id, 
+                     id: blog_post.id,
+                     post: {}
+                   }
+      cannot_update_posts!
     end
   end
 end

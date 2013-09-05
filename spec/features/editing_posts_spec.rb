@@ -11,6 +11,7 @@ feature "Editing posts" do
 
   before do
     define_permission!(user, "view", project)
+    define_permission!(user, "edit posts", project)
     sign_in_as!(user)
     visit '/'
     click_link project.name
