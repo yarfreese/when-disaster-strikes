@@ -33,6 +33,12 @@ describe PostsController do
                                    "on this project.")
     end
 
+    def cannot_delete_posts!
+      expect(response).to redirect_to(project)
+      expect(flash[:alert]).to eql("You cannot delete posts " \
+                                   "from this project.")
+    end
+
     it "cannot begin to create a post" do
       get :new, :project_id => project.id
       cannot_create_posts!
@@ -54,6 +60,13 @@ describe PostsController do
                      post: {}
                    }
       cannot_update_posts!
+    end
+
+    it "cannot delete a post without permission" do
+      delete :destroy, { project_id: project.id,
+                        id: blog_post.id
+                       }
+      cannot_delete_posts! 
     end
   end
 end

@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :authorize_create!, only: [:new, :create]
   before_action :authorize_update!, only: [:edit, :update]
+  before_action :authorize_delete!, only: :destroy
 
   def new
     @post = @project.posts.build
@@ -83,4 +84,12 @@ private
       redirect_to @project
     end
   end  
+
+private
+  def authorize_delete!
+    if !current_user.admin? && cannot?("delete posts".to_sym, @project)
+      flash[:alert] = "You cannot delete posts from this project."
+      redirect_to @project
+    end
+  end
 end
