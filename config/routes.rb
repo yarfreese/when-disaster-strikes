@@ -2,7 +2,12 @@ Wds::Application.routes.draw do
   # get "users/index" # created when we created admin namespace with rails g controller admin/users index
   namespace :admin do
     root :to => "base#index"
-    resources :users
+    resources :users do
+      resources :permissions
+
+      put "permissions", to: "permissions#set",
+                         as: "set_permissions"
+    end
   end
   #get "users/new"
   #get "users/create"
@@ -14,6 +19,7 @@ Wds::Application.routes.draw do
   root :to => "projects#index"
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy", as: "signout"
 end
 
   # The priority is based upon order of creation: first created -> highest priority.
