@@ -1,8 +1,12 @@
 <div id='post'>
   <h2><%= @post.title %></h2>
   <span id='author'>Created by <%= @post.user.email %></span>
-  <%= link_to "Edit Post", [:edit, @project, @post ] %>
-  <%= link_to "Delete Post", [@project, @post], method: :delete,
-      data: { confirm: "Are you sure you want to delete this post?" } %>
+  <%= authorized?("edit posts", @project) do %>
+    <%= link_to "Edit Post", [:edit, @project, @post ] %>
+  <% end %>k
+  <%= authorized?("delete posts", @project) do %>  
+    <%= link_to "Delete Post", [@project, @post], method: :delete,
+        data: { confirm: "Are you sure you want to delete this post?" } %>
+  <% end %>
   <%= simple_format(@post.description) %>
 </div>
