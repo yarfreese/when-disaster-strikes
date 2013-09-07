@@ -24,4 +24,50 @@ feature "Assigning permissions" do
     sign_in_as!(user)
     expect(page).to have_content(project.name)
   end
+
+  scenario "Creating posts for a project" do
+    check_permission_box "view", project
+    check_permission_box "create_posts", project
+    click_button "Update"
+    click_link "Sign out"
+
+    sign_in_as!(user)
+    click_link project.name
+    click_link "New Post"
+    fill_in "Title", with: "Shiny!"
+    fill_in "Description", with: "Make it so!"
+    click_button "Create"
+
+    expect(page).to have_content("Post has been created.")
+  end
+
+  scenario "Updating posts for a project"  do
+    check_permission_box "view", project
+    check_permission_box "edit_posts", project
+    click_button "Update"
+    click_link "Sign out"
+
+    sign_in_as!(user)
+    click_link project.name
+    click_link post.title
+    click_link "Edit Post"
+    fill_in "Title", with: "Really shiny!"
+    click_button "Update Post"
+
+    expect(page).to have_content("Post has been updated")
+  end
+
+  scenario "Deleting a post for a project" do
+    check_permission_box "view", project
+    check_permission_box "delete_posts", project
+    click_button "Update"
+    click_link "Sign out"
+
+    sign_in_as!(user)
+    click_link project.name
+    click_link post.title
+    click_link "Delete Post" 
+
+    expect(page).to have_content("Post has been deleted")
+  end
 end

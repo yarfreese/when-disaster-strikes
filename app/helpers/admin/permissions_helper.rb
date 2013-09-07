@@ -1,7 +1,10 @@
 module Admin::PermissionsHelper
   def permissions
     {
-      "view" => "View"
+      "view" => "View",
+      "create posts" => "Create Posts",
+      "edit posts" => "Edit Posts",
+      "delete posts" => "Delete Posts"
     }
   end
 end
