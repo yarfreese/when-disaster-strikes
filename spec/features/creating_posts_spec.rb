@@ -44,5 +44,18 @@ feature "Creating Posts" do
     expect(page).to have_content("Description is too short")
   end
 
+  scenario "Creating a post with an attachment" do
+    fill_in "Title", with: "Add documentation for blink tag" 
+    fill_in "Description", with: "The blink tag has a speed attribute"
+    attach_file "File", "spec/fixtures/speed.txt"
+    click_button "Create Post"
+
+    expect(page).to have_content("Post has been created.")
+
+    within("#post .asset") do
+      expect(page).to have_content("speed.txt")
+    end
+  end
+
 end
 

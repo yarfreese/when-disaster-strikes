@@ -15,6 +15,9 @@ gem 'sass-rails', '~> 4.0.0'
 # need to add Ability class
 gem 'cancan', '1.6.9'
 
+# CarrierWave for uploading files
+gem "carrierwave", '0.8.0'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
