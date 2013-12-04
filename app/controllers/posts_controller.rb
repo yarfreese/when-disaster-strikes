@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     @post = @project.posts.build
     # about the same as:
     # Post.new(:project_id => @project.id)
+    3.times { @post.assets.build }
   end
 
   def create
@@ -66,7 +67,8 @@ private
 
 private
   def post_params
-    params.require(:post).permit(:title, :description, :asset)
+    params.require(:post).permit(:title, :description, assets_attributes: :asset)
+    #params.require(:post).permit(:title, :description, assets_attributes: [:asset])
   end
 
 private

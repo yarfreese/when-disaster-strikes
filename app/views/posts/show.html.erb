@@ -13,14 +13,16 @@
 
   <%= simple_format(@post.description) %>
 
-  <% if @post.asset.present? %>
-    <h3>Attached File</h3>
-    <div class="asset">
+  <% if @post.assets.present? %>
+    <h3>Attached Files</h3>
+    <div class="assets">
+    <% @post.assets.each do |asset| %>
       <p>
-        <%= link_to File.basename(@post.asset.path), @post.asset.url %>
+        <%= link_to File.basename(asset.asset.path), asset.asset.url %>
       </p>
-      <p><small><%= number_to_human_size(@post.asset.size) %>
+      <p><small><%= number_to_human_size(asset.asset.size) %>
        </small></p>
+    <% end %>
     </div>
   <% end %>
 </div>
