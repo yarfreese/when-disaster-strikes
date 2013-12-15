@@ -12,6 +12,10 @@ class SessionsController < ApplicationController
     end 
   end
 
+  def oath_create
+    raise env["omniauth.auth"].to_yaml
+  end
+
   def destroy
     session[:user_id] = nil
     flash[:notice] = "Signed out successfully."
