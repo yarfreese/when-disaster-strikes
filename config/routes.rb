@@ -17,7 +17,7 @@ Wds::Application.routes.draw do
     resources :posts
   end
   root :to => "projects#index"
-  match 'auth/:provider/callback', to: 'sessions#oath_create'
+  get 'auth/:provider/callback', to: 'sessions#oath_create'
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy", as: "signout"
