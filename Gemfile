@@ -65,3 +65,6 @@ group :test do
   gem 'factory_girl', '4.2.0'
 end
 
+gem 'rails_12factor', group: :production
+
+ruby "1.9.3"
