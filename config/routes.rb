@@ -1,3 +1,5 @@
+require 'api_constraints'
+
 Wds::Application.routes.draw do
   # get "users/index" # created when we created admin namespace with rails g controller admin/users index
   namespace :admin do
@@ -21,6 +23,13 @@ Wds::Application.routes.draw do
   get "/signin", to: "sessions#new"
   post "/signin", to: "sessions#create"
   delete "/signout", to: "sessions#destroy", as: "signout"
+
+  namespace :api, defaults: {format: 'json'} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
+      resources :quotations
+    end
+  end
+
 end
 
   # The priority is based upon order of creation: first created -> highest priority.

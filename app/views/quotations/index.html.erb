@@ -1,0 +1,9 @@
+<h1> Quotations </h1>
+<% @quotations.each do |quot| %>
+  <%= quot.passage %> - 
+  <% if quot.source != 'N/A' %>
+  <%= quot.source %> -
+  <% end %>
+  <%= quot.author %>
+  <p />
+<% end %>
