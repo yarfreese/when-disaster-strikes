@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20131225011006) do
 
-  create_table "assets", force: true do |t|
-    t.string   "asset"
-    t.integer  "post_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "permissions", force: true do |t|
     t.integer  "user_id"
     t.integer  "thing_id"
