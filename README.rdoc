@@ -1,4 +1,11 @@
-== README
+== README for WDS (When Disaster Strikes)
+
+Intended to be a site promoting community when personal disasters strike.
+
+Currently displays a random quote after you sign up.
+
+An admin can give users access to view, create, and edit projects and posts.
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
@@ -6,16 +13,25 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
+  ruby 1.9.3p362 (2012-12-25 revision 38607) [i686-linux]
+
+* Rails version 4.0.0
 
 * System dependencies
 
 * Configuration
+  Requires Environment Variables for OmniAuth:
+  TWITTER_KEY
+  TWITTER_SECRET
 
-* Database creation
+* Database 
+  Quotations were copied from tab delimited files using the command:
+  COPY quotations (author, source, passage) FROM '/home/theresa/quotesX';
 
 * Database initialization
 
 * How to run the test suite
+  Rspec is used for the test suite; test can be run individually or all at once using the command rspec
 
 * Services (job queues, cache servers, search engines, etc.)
 
@@ -24,5 +40,4 @@ Things you may want to cover:
 * ...
 
 
-Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.

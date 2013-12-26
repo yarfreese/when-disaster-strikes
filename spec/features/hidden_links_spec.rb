@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 feature "hidden links" do
+  before do
+    quotation = FactoryGirl.create(:quotation)
+  end
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin_user) }
   let(:project) { FactoryGirl.create(:project) }
